@@ -10,10 +10,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { ProductService } from '../services/product.service';
-import { Product, SubmitMode } from '../models/product.model';
-import { ProductForm } from '../product-form/product-form';
 import { tap } from 'rxjs';
+import { ProductService } from '../../services/product.service';
+import { Product, SubmitMode } from '../../models/product.model';
+import { ProductForm } from '../../components/product-form/product-form';
 
 @Component({
   selector: 'app-edit-product',
@@ -30,8 +30,8 @@ import { tap } from 'rxjs';
     MatSnackBarModule,
     ProductForm,
   ],
-  templateUrl: './edit-product.html',
-  styleUrl: './edit-product.scss',
+  templateUrl: './edit-product-page.html',
+  styleUrl: './edit-product-page.scss',
 })
 export class EditProduct implements OnInit {
   private router = inject(Router);

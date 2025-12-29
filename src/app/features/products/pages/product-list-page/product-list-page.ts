@@ -10,17 +10,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { ProductFilters } from '../product-filters/product-filters';
-import { DeleteDialog, DeleteDialogData } from '../../../shared/delete-dialog/delete-dialog';
-import { ProductsTable } from '../products-table/products-table';
+import { ProductService } from '../../services/product.service';
 import {
   Product,
   ProductActiveFilters,
-  SortField,
-  SortDirection,
   SortConfig,
-} from '../models/product.model';
-import { ProductService } from '../services/product.service';
+  SortDirection,
+  SortField,
+} from '../../models/product.model';
+import { DeleteDialog, DeleteDialogData } from '../../../../shared/delete-dialog/delete-dialog';
+import { ProductFilters } from '../../components/product-filters/product-filters';
+import { ProductsTable } from '../../components/products-table/products-table';
 
 @Component({
   selector: 'app-product-list',
@@ -36,8 +36,8 @@ import { ProductService } from '../services/product.service';
     ProductFilters,
     ProductsTable,
   ],
-  templateUrl: './product-list.html',
-  styleUrl: './product-list.scss',
+  templateUrl: './product-list-page.html',
+  styleUrl: './product-list-page.scss',
 })
 export class ProductList implements OnInit {
   public productService = inject(ProductService);

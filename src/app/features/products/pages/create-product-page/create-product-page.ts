@@ -9,11 +9,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { Product, SubmitMode } from '../models/product.model';
 import { Router } from '@angular/router';
-import { ProductService } from '../services/product.service';
-import { ProductForm } from '../product-form/product-form';
+
 import { tap } from 'rxjs';
+import { ProductService } from '../../services/product.service';
+import { Product, SubmitMode } from '../../models/product.model';
+import { ProductForm } from '../../components/product-form/product-form';
 
 @Component({
   selector: 'app-create-product',
@@ -30,8 +31,8 @@ import { tap } from 'rxjs';
     MatSnackBarModule,
     ProductForm,
   ],
-  templateUrl: './create-product.html',
-  styleUrl: './create-product.scss',
+  templateUrl: './create-product-page.html',
+  styleUrl: './create-product-page.scss',
 })
 export class CreateProduct {
   private router = inject(Router);

@@ -3,9 +3,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { Product, SortField, SortDirection } from '../models/product.model';
 import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
+import { Product, SortDirection, SortField } from '../../models/product.model';
 
 export interface PeriodicElement {
   name: string;

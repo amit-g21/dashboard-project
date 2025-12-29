@@ -4,17 +4,23 @@ export const routes: Routes = [
   {
     path: 'products',
     loadComponent: () =>
-      import('./features/products/product-list/product-list').then((m) => m.ProductList),
+      import('./features/products/pages/product-list-page/product-list-page').then(
+        (m) => m.ProductList
+      ),
   },
   {
     path: 'products/create',
     loadComponent: () =>
-      import('./features/products/create-product/create-product').then((m) => m.CreateProduct),
+      import('./features/products/pages/create-product-page/create-product-page').then(
+        (m) => m.CreateProduct
+      ),
   },
   {
     path: 'products/edit/:id',
     loadComponent: () =>
-      import('./features/products/edit-product/edit-product').then((m) => m.EditProduct),
+      import('./features/products/pages/edit-product-page/edit-product-page').then(
+        (m) => m.EditProduct
+      ),
   },
   {
     path: '',

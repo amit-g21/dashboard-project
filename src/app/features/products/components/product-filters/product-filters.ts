@@ -6,9 +6,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { debounceTime } from 'rxjs';
-import { categoryList, statusList } from '../constants/products.constans';
-import { ProductActiveFilters } from '../models/product.model';
 import { MatButton } from '@angular/material/button';
+import { ProductActiveFilters } from '../../models/product.model';
+import { categoryList, statusList } from '../../constants/products.constans';
 
 @Component({
   selector: 'app-product-filters',
