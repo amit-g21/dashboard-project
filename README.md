@@ -1,59 +1,91 @@
-# DashboardProject
+Product Management Dashboard
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.4.
+Angular application for managing products in an e-commerce catalog.
+The project demonstrates clean architecture, RxJS usage, reactive forms, caching, and basic product CRUD flows.
 
-## Development server
+---
 
-To start a local development server, run:
+📌 Features
 
-```bash
-ng serve
-```
+Product list with:
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Search
 
-## Code scaffolding
+Filters (category, status)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Sorting
 
-```bash
-ng generate component component-name
-```
+Pagination
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Create new product
 
-```bash
-ng generate --help
-```
+Edit existing product
 
-## Building
+Reactive Forms with validation
 
-To build the project run:
+Clear UI states: loading, empty state, error handling
 
-```bash
-ng build
-```
+Client-side caching using RxJS
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Strong typing with TypeScript
 
-## Running unit tests
+Feature-based folder structure
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+---
 
-```bash
-ng test
-```
+🧱 Tech Stack
 
-## Running end-to-end tests
+Angular
 
-For end-to-end (e2e) testing, run:
+Angular Material
 
-```bash
-ng e2e
-```
+RxJS
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+json-server (mock backend)
 
-## Additional Resources
+TypeScript
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+
+📁 Project Structure
+
+src/
+├── app/
+│ ├── features/
+│ │ └── products/
+│ │ ├── components/
+│ │ ├── pages/
+│ │ ├── services/
+│ │ └── models/
+│ │
+│ ├── shared/
+
+pages – routed pages (list, create, edit)
+
+components – reusable UI components
+
+services – API and data access
+
+models – strongly typed interfaces and enums
+
+---
+
+🚀 Getting Started
+
+1. Clone the repository
+
+git clone
+cd dashboard-project.
+
+2. Install dependencies
+   npm install
+
+3. Run mock backend (json-server)
+
+The project uses json-server as a fake REST API.
+
+npm run server
+
+4. Run the Angular application
+
+npm start
