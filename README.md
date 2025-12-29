@@ -63,13 +63,19 @@ models – strongly typed interfaces and enums
 
 1. Clone the repository
 
+
+
 git clone
 cd dashboard-project.
+
+
 
 2. Install dependencies
    npm install
 
-3. Run mock backend (json-server)
+   
+
+4. Run mock backend (json-server)
 
 The project uses json-server as a fake REST API.
 
