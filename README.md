@@ -11,6 +11,7 @@ Angular application for managing products in an e-commerce catalog. The project 
   - Pagination
 - **Create new product**
 - **Edit existing product**
+- **Delete existing product**
 - Reactive Forms with validation
 - Clear UI states: loading, empty state, error handling
 - Client-side caching using RxJS
