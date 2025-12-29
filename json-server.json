@@ -1,0 +1,8 @@
+{
+  "port": 3000,
+  "watch": true,
+  "host": "localhost",
+  "headers": {
+    "Access-Control-Expose-Headers": "X-Total-Count"
+  }
+}

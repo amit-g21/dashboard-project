@@ -1,0 +1,22 @@
+<div class="product-filters-container" [formGroup]="filterForm">
+  <mat-form-field appearance="outline" class="compact-field">
+    <mat-label>Category</mat-label>
+    <mat-select multiple formControlName="categories">
+      @for (category of categoryList; track category) {
+      <mat-option [value]="category">{{ category }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="compact-field">
+    <mat-label>Status</mat-label>
+    <mat-select formControlName="status">
+      @for (status of statusList; track status.value) {
+      <mat-option [value]="status.value">{{ status.label }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  @if (filterForm.dirty) {
+  <button mat-button (click)="clearFilters()">Clear Filters</button> }
+</div>

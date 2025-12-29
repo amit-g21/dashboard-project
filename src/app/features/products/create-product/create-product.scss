@@ -1,0 +1,63 @@
+.create-product-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .create-product-wrapper {
+    background: white;
+    border-radius: 8px;
+    padding: 32px;
+
+    .form-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .product-form {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+
+      .form-row {
+        display: flex;
+        gap: 10px;
+      }
+
+      .form-field {
+        width: 45%;
+      }
+    }
+  }
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 16px;
+  padding-top: 24px;
+  border-top: 1px solid #e0e0e0;
+
+  .submit-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .button-spinner {
+      display: inline-block;
+      margin-right: 0;
+    }
+  }
+}
+
+::ng-deep {
+  .mat-mdc-form-field {
+    .mat-mdc-text-field-wrapper {
+      padding-bottom: 0;
+    }
+  }
+}

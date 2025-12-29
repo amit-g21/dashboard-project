@@ -1,0 +1,388 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Laptop Pro X1",
+      "sku": "LPX-1001",
+      "category": "Electronics",
+      "description": "High-performance laptop with 32GB RAM and 1TB SSD.",
+      "price": 1899.99,
+      "stock": 45,
+      "isActive": true,
+      "createdAt": "2025-12-15T10:00:00Z",
+      "updatedAt": "2025-12-28T12:30:00Z"
+    },
+    {
+      "id": 2,
+      "name": "Wireless Mouse G2",
+      "sku": "WM-G201",
+      "category": "Accessories",
+      "description": "Ergonomic wireless mouse with long battery life.",
+      "price": 49.95,
+      "stock": 150,
+      "isActive": true
+    },
+    {
+      "id": 3,
+      "name": "4K Monitor 32-inch",
+      "sku": "MN-4K32",
+      "category": "Electronics",
+      "description": "Stunning 4K resolution monitor for professional use.",
+      "price": 599,
+      "stock": 0,
+      "isActive": false
+    },
+    {
+      "id": 4,
+      "name": "Coffee Maker Deluxe",
+      "sku": "CM-DLX",
+      "category": "Home & Kitchen",
+      "description": "Automatic drip coffee maker with timer.",
+      "price": 89.5,
+      "stock": 80,
+      "isActive": true
+    },
+    {
+      "id": 5,
+      "name": "Electric Kettle Rapid",
+      "sku": "EK-R10",
+      "category": "Home & Kitchen",
+      "description": "1.7L capacity, fast boiling electric kettle.",
+      "price": 35.99,
+      "stock": 12,
+      "isActive": true
+    },
+    {
+      "id": 6,
+      "name": "Noise Cancelling Headphones",
+      "sku": "NC-HP05",
+      "category": "Audio",
+      "description": "Premium sound quality and industry-leading noise cancellation.",
+      "price": 249,
+      "stock": 90,
+      "isActive": true
+    },
+    {
+      "id": 7,
+      "name": "Smart Watch Sport",
+      "sku": "SW-SP2",
+      "category": "Wearables",
+      "description": "Fitness tracking, heart rate monitor, and GPS.",
+      "price": 199.99,
+      "stock": 5,
+      "isActive": true
+    },
+    {
+      "id": 8,
+      "name": "Portable Bluetooth Speaker",
+      "sku": "PBS-XL",
+      "category": "Audio",
+      "description": "Loud, clear sound with 12-hour battery life.",
+      "price": 65,
+      "stock": 0,
+      "isActive": false
+    },
+    {
+      "id": 9,
+      "name": "Ergonomic Office Chair",
+      "sku": "OC-E900",
+      "category": "Furniture",
+      "description": "Adjustable height and lumbar support for all-day comfort.",
+      "price": 280,
+      "stock": 18,
+      "isActive": true
+    },
+    {
+      "id": 10,
+      "name": "Gaming Keyboard RGB",
+      "sku": "GK-R700",
+      "category": "Accessories",
+      "description": "Mechanical keys with customizable RGB lighting.",
+      "price": 110,
+      "stock": 60,
+      "isActive": true
+    },
+    {
+      "id": 11,
+      "name": "Tablet Mini 8-inch",
+      "sku": "TB-M08",
+      "category": "Electronics",
+      "description": "Compact and powerful tablet for media consumption.",
+      "price": 320,
+      "stock": 70,
+      "isActive": true
+    },
+    {
+      "id": 12,
+      "name": "External SSD 2TB",
+      "sku": "ESD-2TB",
+      "category": "Accessories",
+      "description": "High-speed portable solid-state drive.",
+      "price": 149.99,
+      "stock": 30,
+      "isActive": true
+    },
+    {
+      "id": 13,
+      "name": "Air Fryer 5L",
+      "sku": "AF-500",
+      "category": "Home & Kitchen",
+      "description": "Cook healthier meals with little to no oil.",
+      "price": 120,
+      "stock": 0,
+      "isActive": false
+    },
+    {
+      "id": 14,
+      "name": "Smart Home Hub",
+      "sku": "SH-H01",
+      "category": "Smart Home",
+      "description": "Central unit for connecting all smart devices.",
+      "price": 89,
+      "stock": 22,
+      "isActive": true
+    },
+    {
+      "id": 15,
+      "name": "Security Camera Indoor",
+      "sku": "SC-I30",
+      "category": "Smart Home",
+      "description": "HD 1080p indoor surveillance camera.",
+      "price": 45,
+      "stock": 95,
+      "isActive": true
+    },
+    {
+      "id": 16,
+      "name": "Running Shoes X-Trainer",
+      "sku": "RS-XTR",
+      "category": "Apparel",
+      "description": "Lightweight running shoes for long distances.",
+      "price": 95,
+      "stock": 40,
+      "isActive": true
+    },
+    {
+      "id": 17,
+      "name": "Men's T-Shirt Cotton",
+      "sku": "MT-C10",
+      "category": "Apparel",
+      "description": "Classic fit, 100% organic cotton t-shirt.",
+      "price": 25,
+      "stock": 300,
+      "isActive": true
+    },
+    {
+      "id": 18,
+      "name": "Leather Wallet Slim",
+      "sku": "LW-SLM",
+      "category": "Accessories",
+      "description": "Minimalist genuine leather wallet.",
+      "price": 55,
+      "stock": 0,
+      "isActive": false
+    },
+    {
+      "id": 19,
+      "name": "Tripod Professional",
+      "sku": "TR-PRO",
+      "category": "Photography",
+      "description": "Heavy-duty tripod for DSLR cameras.",
+      "price": 150,
+      "stock": 15,
+      "isActive": true
+    },
+    {
+      "id": 20,
+      "name": "Ring Light 18-inch",
+      "sku": "RL-18",
+      "category": "Photography",
+      "description": "Dimmable LED ring light for video and photography.",
+      "price": 75,
+      "stock": 28,
+      "isActive": true
+    },
+    {
+      "id": 21,
+      "name": "Dumbbell Set Adjustable",
+      "sku": "DS-ADJ",
+      "category": "Fitness",
+      "description": "25kg adjustable dumbbell set.",
+      "price": 180,
+      "stock": 10,
+      "isActive": true
+    },
+    {
+      "id": 22,
+      "name": "Yoga Mat Premium",
+      "sku": "YM-PRM",
+      "category": "Fitness",
+      "description": "Thick, non-slip yoga mat.",
+      "price": 40,
+      "stock": 110,
+      "isActive": true
+    },
+    {
+      "id": 23,
+      "name": "Robotic Vacuum Cleaner",
+      "sku": "RV-C9",
+      "category": "Home & Kitchen",
+      "description": "Smart mapping robotic vacuum with long battery life.",
+      "price": 350,
+      "stock": 50,
+      "isActive": true
+    },
+    {
+      "id": 24,
+      "name": "E-Reader Paperlike",
+      "sku": "ER-PL1",
+      "category": "Electronics",
+      "description": "6-inch E-Ink display, built-in light.",
+      "price": 139,
+      "stock": 70,
+      "isActive": true
+    },
+    {
+      "id": 25,
+      "name": "HDMI Cable 10ft",
+      "sku": "CBL-HD10",
+      "category": "Accessories",
+      "description": "High-speed 4K HDMI 2.0 cable.",
+      "price": 15,
+      "stock": 400,
+      "isActive": true
+    },
+    {
+      "id": 26,
+      "name": "Pet Bed Orthopedic",
+      "sku": "PB-ORT",
+      "category": "Pets",
+      "description": "Comfortable bed for older dogs.",
+      "price": 60,
+      "stock": 0,
+      "isActive": false
+    },
+    {
+      "id": 27,
+      "name": "Dog Food Premium 15kg",
+      "sku": "DF-PRM",
+      "category": "Pets",
+      "description": "High-protein, grain-free formula.",
+      "price": 75,
+      "stock": 20,
+      "isActive": true
+    },
+    {
+      "id": 28,
+      "name": "Desk Lamp LED",
+      "sku": "DL-LED",
+      "category": "Furniture",
+      "description": "Adjustable arm LED desk lamp.",
+      "price": 55,
+      "stock": 65,
+      "isActive": true
+    },
+    {
+      "id": 29,
+      "name": "External HDD 4TB",
+      "sku": "EHD-4TB",
+      "category": "Accessories",
+      "description": "External spinning hard drive for backup.",
+      "price": 99,
+      "stock": 10,
+      "isActive": true
+    },
+    {
+      "id": 30,
+      "name": "Ultra HD Webcam",
+      "sku": "WC-UHD",
+      "category": "Accessories",
+      "description": "4K streaming webcam with auto-focus.",
+      "price": 120,
+      "stock": 33,
+      "isActive": true
+    },
+    {
+      "name": "dsadsa",
+      "sku": "dsda",
+      "category": "Electronics",
+      "description": "dddddddddee",
+      "price": 321,
+      "stock": 3,
+      "isActive": true,
+      "createdAt": "2025-12-29T01:09:03.618Z",
+      "updatedAt": "2025-12-29T01:09:03.618Z",
+      "id": 31
+    },
+    {
+      "name": "dsad",
+      "sku": "432",
+      "category": "Accessories",
+      "description": "ewqewewqdwe",
+      "price": 22,
+      "stock": 22,
+      "isActive": true,
+      "createdAt": "2025-12-29T01:13:11.154Z",
+      "updatedAt": "2025-12-29T01:13:11.154Z",
+      "id": 32
+    },
+    {
+      "name": "ds",
+      "sku": "343",
+      "category": "Accessories",
+      "description": "dsadsdsddasds",
+      "price": 2,
+      "stock": 2,
+      "isActive": true,
+      "createdAt": "2025-12-29T06:18:41.723Z",
+      "updatedAt": "2025-12-29T06:18:41.723Z",
+      "id": 33
+    },
+    {
+      "name": "fdfd",
+      "sku": "4234",
+      "category": "Accessories",
+      "description": "dsadsadsdas",
+      "price": 3,
+      "stock": 3,
+      "isActive": true,
+      "createdAt": "2025-12-29T06:24:07.610Z",
+      "updatedAt": "2025-12-29T06:24:07.610Z",
+      "id": 34
+    },
+    {
+      "name": "dsad",
+      "sku": "432",
+      "category": "Accessories",
+      "description": "edsdadssss",
+      "price": 4,
+      "stock": 4,
+      "isActive": true,
+      "createdAt": "2025-12-29T06:25:54.980Z",
+      "updatedAt": "2025-12-29T06:25:54.980Z",
+      "id": 35
+    },
+    {
+      "name": "dsa",
+      "sku": "dss",
+      "category": "Clothing",
+      "description": "dasdsdsaddsa",
+      "price": 3,
+      "stock": 23,
+      "isActive": true,
+      "createdAt": "2025-12-29T06:26:52.631Z",
+      "updatedAt": "2025-12-29T06:26:52.631Z",
+      "id": 36
+    },
+    {
+      "0": "d",
+      "1": "s",
+      "2": "a",
+      "3": "d",
+      "4": " ",
+      "createdAt": "2025-12-29T06:32:28.036Z",
+      "updatedAt": "2025-12-29T06:32:28.036Z",
+      "id": 37
+    }
+  ]
+}

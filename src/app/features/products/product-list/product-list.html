@@ -1,0 +1,67 @@
+<div class="products-list-container">
+  <div class="products-wrapper">
+    <div class="products-header">
+      <div>
+        <h1>Products</h1>
+        <p>Manage your product inventory and information</p>
+      </div>
+      <button mat-flat-button color="primary" (click)="onCreateProduct()">
+        <mat-icon class="mr-2 h-4 w-4">add</mat-icon>
+        Add Product
+      </button>
+    </div>
+    <div class="products-search-filters">
+      <div class="products-search-wrapper">
+        <mat-form-field appearance="outline" class="search-input">
+          <mat-icon matPrefix>search</mat-icon>
+          <input
+            matInput
+            type="text"
+            placeholder="Search products..."
+            [disabled]="loading()"
+            (input)="onSearch($event)"
+          />
+        </mat-form-field>
+      </div>
+      <app-product-filters (filtersChanged)="onFiltersChanged($event)"></app-product-filters>
+    </div>
+    <div class="products-table-layout">
+      @if (loading()) {
+      <div class="loading-container">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Loading products...</p>
+      </div>
+      } @else {
+      <app-products-table
+        [productsList]="filteredProducts()"
+        [currentSort]="getCurrentSortValue()"
+        (sortChanged)="onSortChanged($event)"
+      >
+      </app-products-table>
+
+      <div class="products-pagination">
+        <p class="pagination-info">Page {{ currentPage() }} of {{ totalPages() }}</p>
+        <div class="pagination-controls">
+          <span class="page-number"></span>
+          <div class="pagination-buttons">
+            <button
+              mat-stroked-button
+              [disabled]="currentPage() === 1 || loading()"
+              (click)="previousPage()"
+            >
+              Previous
+            </button>
+            <button
+              mat-stroked-button
+              [disabled]="currentPage() === totalPages() || loading()"
+              (click)="nextPage()"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</div>

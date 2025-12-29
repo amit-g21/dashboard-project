@@ -1,0 +1,25 @@
+.products-table-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .products-table-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .products-table-container {
+    overflow: hidden;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+
+    .mat-mdc-header-row {
+      background-color: #f6f6f698;
+    }
+
+    .mat-mdc-row {
+      background-color: #fff;
+    }
+  }
+}
