@@ -14,13 +14,7 @@
       <div class="products-search-wrapper">
         <mat-form-field appearance="outline" class="search-input">
           <mat-icon matPrefix>search</mat-icon>
-          <input
-            matInput
-            type="text"
-            placeholder="Search products..."
-            [disabled]="loading()"
-            (input)="onSearch($event)"
-          />
+          <input matInput type="text" placeholder="Search products..." (input)="onSearch($event)" />
         </mat-form-field>
       </div>
       <app-product-filters (filtersChanged)="onFiltersChanged($event)"></app-product-filters>

@@ -13,6 +13,7 @@ import { Product, SubmitMode } from '../models/product.model';
 import { Router } from '@angular/router';
 import { ProductService } from '../services/product.service';
 import { ProductForm } from '../product-form/product-form';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-create-product',
@@ -45,28 +46,31 @@ export class CreateProduct {
   onSubmit(product: Product): void {
     this.isSubmitting.set(true);
 
-    this.productService.createProduct(product).subscribe({
-      next: () => {
-        this.isSubmitting.set(false);
-        this.snackBar.open('Product created successfully!', 'Close', {
-          duration: 3000,
-          horizontalPosition: 'start',
-          verticalPosition: 'bottom',
-          panelClass: ['success-snackbar'],
-        });
-        this.router.navigate(['/products']);
-      },
-      error: (error) => {
-        this.isSubmitting.set(false);
-        const message = error?.message || 'Failed to create product. Please try again.';
-        this.snackBar.open(message, 'Close', {
-          duration: 5000,
-          horizontalPosition: 'start',
-          verticalPosition: 'bottom',
-          panelClass: ['error-snackbar'],
-        });
-      },
-    });
+    this.productService
+      .createProduct(product)
+      .pipe(tap(() => this.productService.clearCache()))
+      .subscribe({
+        next: () => {
+          this.isSubmitting.set(false);
+          this.snackBar.open('Product created successfully!', 'Close', {
+            duration: 3000,
+            horizontalPosition: 'start',
+            verticalPosition: 'bottom',
+            panelClass: ['success-snackbar'],
+          });
+          this.router.navigate(['/products']);
+        },
+        error: (error) => {
+          this.isSubmitting.set(false);
+          const message = error?.message || 'Failed to create product. Please try again.';
+          this.snackBar.open(message, 'Close', {
+            duration: 5000,
+            horizontalPosition: 'start',
+            verticalPosition: 'bottom',
+            panelClass: ['error-snackbar'],
+          });
+        },
+      });
   }
 
   onCancel(): void {

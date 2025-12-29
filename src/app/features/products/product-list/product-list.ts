@@ -1,6 +1,6 @@
 import { Component, computed, inject, OnInit, signal, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { finalize, debounceTime, Subject } from 'rxjs';
+import { finalize, debounceTime, Subject, tap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -70,7 +70,7 @@ export class ProductList implements OnInit {
     this.loadProducts();
 
     this.searchSubject
-      .pipe(debounceTime(500), takeUntilDestroyed(this.destroyRef))
+      .pipe(debounceTime(700), takeUntilDestroyed(this.destroyRef))
       .subscribe((searchTerm: string) => {
         this.term.set(searchTerm);
         this.currentPage.set(1);
@@ -166,26 +166,29 @@ export class ProductList implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
-        this.productService.deleteProduct(productId).subscribe({
-          next: () => {
-            this.snackBar.open('Product deleted successfully!', 'Close', {
-              duration: 3000,
-              horizontalPosition: 'start',
-              verticalPosition: 'bottom',
-              panelClass: ['success-snackbar'],
-            });
-            this.loadProducts();
-          },
-          error: (error) => {
-            const errorMessage = error?.message || 'Failed to delete product. Please try again.';
-            this.snackBar.open(errorMessage, 'Close', {
-              duration: 5000,
-              horizontalPosition: 'start',
-              verticalPosition: 'bottom',
-              panelClass: ['error-snackbar'],
-            });
-          },
-        });
+        this.productService
+          .deleteProduct(productId)
+          .pipe(tap(() => this.productService.clearCache()))
+          .subscribe({
+            next: () => {
+              this.snackBar.open('Product deleted successfully!', 'Close', {
+                duration: 3000,
+                horizontalPosition: 'start',
+                verticalPosition: 'bottom',
+                panelClass: ['success-snackbar'],
+              });
+              this.loadProducts();
+            },
+            error: (error) => {
+              const errorMessage = error?.message || 'Failed to delete product. Please try again.';
+              this.snackBar.open(errorMessage, 'Close', {
+                duration: 5000,
+                horizontalPosition: 'start',
+                verticalPosition: 'bottom',
+                panelClass: ['error-snackbar'],
+              });
+            },
+          });
       }
     });
   }

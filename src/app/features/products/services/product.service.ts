@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { map, Observable, shareReplay } from 'rxjs';
 import { Product, SortField, SortDirection, ProductActiveFilters } from '../models/product.model';
 
 @Injectable({
@@ -8,6 +8,14 @@ import { Product, SortField, SortDirection, ProductActiveFilters } from '../mode
 })
 export class ProductService {
   private apiUrl = 'http://localhost:3000/products';
+  private cache = new Map<
+    string,
+    Observable<{
+      products: Product[];
+      total: number;
+    }>
+  >();
+
   private http = inject(HttpClient);
 
   getProducts(
@@ -41,7 +49,13 @@ export class ProductService {
       params = params.set('isActive', filters.status.toString());
     }
 
-    return this.http
+    const key = JSON.stringify(params);
+
+    if (this.cache.has(key)) {
+      return this.cache.get(key)!;
+    }
+
+    const request$ = this.http
       .get<Product[]>(this.apiUrl, {
         params,
         observe: 'response',
@@ -52,8 +66,17 @@ export class ProductService {
             products: res.body || [],
             total: Number(res.headers.get('X-Total-Count')) || 0,
           };
-        })
+        }),
+        shareReplay(1)
       );
+
+    this.cache.set(key, request$);
+
+    return request$;
+  }
+
+  clearCache(): void {
+    this.cache.clear();
   }
 
   getProductById(id: number): Observable<Product> {

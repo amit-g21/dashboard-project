@@ -13,6 +13,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ProductService } from '../services/product.service';
 import { Product, SubmitMode } from '../models/product.model';
 import { ProductForm } from '../product-form/product-form';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-edit-product',
@@ -84,24 +85,27 @@ export class EditProduct implements OnInit {
   onSubmit(product: Product): void {
     this.isSubmitting.set(true);
 
-    this.productService.updateProduct(this.productId, product).subscribe({
-      next: () => {
-        this.isSubmitting.set(false);
-        this.snackBar.open('Product updated successfully!', 'Close', {
-          duration: 3000,
-          panelClass: ['success-snackbar'],
-        });
-        this.router.navigate(['/products']);
-      },
-      error: (error) => {
-        this.isSubmitting.set(false);
-        const message = error?.message || 'Failed to update product';
-        this.snackBar.open(message, 'Close', {
-          duration: 5000,
-          panelClass: ['error-snackbar'],
-        });
-      },
-    });
+    this.productService
+      .updateProduct(this.productId, product)
+      .pipe(tap(() => this.productService.clearCache()))
+      .subscribe({
+        next: () => {
+          this.isSubmitting.set(false);
+          this.snackBar.open('Product updated successfully!', 'Close', {
+            duration: 3000,
+            panelClass: ['success-snackbar'],
+          });
+          this.router.navigate(['/products']);
+        },
+        error: (error) => {
+          this.isSubmitting.set(false);
+          const message = error?.message || 'Failed to update product';
+          this.snackBar.open(message, 'Close', {
+            duration: 5000,
+            panelClass: ['error-snackbar'],
+          });
+        },
+      });
   }
 
   onCancel(): void {
