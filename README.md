@@ -83,14 +83,9 @@ src/app/
 ## 🧪 Running Tests
 
 ```bash
-# Run all tests
-npm test
-
-# Run tests with coverage
-npm run test:coverage
-
-# Run specific test file
+# Run service test
 ng test --include='**/product.service.spec.ts'
+
 ```
 
 ## 📝 Available Scripts
@@ -99,7 +94,6 @@ ng test --include='**/product.service.spec.ts'
 - `npm run server` - Start json-server (mock API)
 - `npm test` - Run unit tests
 - `npm run build` - Build the project for production
-- `npm run lint` - Lint the code
 
 ## 🌐 API Endpoints
 
