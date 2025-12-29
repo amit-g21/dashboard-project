@@ -49,17 +49,6 @@ TypeScript
 
 📁 Project Structure
 
-src/
-├── app/
-│ ├── features/
-│ │ └── products/
-│ │ ├── components/
-│ │ ├── pages/
-│ │ ├── services/
-│ │ └── models/
-│ │
-│ ├── shared/
-
 pages – routed pages (list, create, edit)
 
 components – reusable UI components
