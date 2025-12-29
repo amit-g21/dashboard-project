@@ -32,13 +32,16 @@ export class ProductService {
       })
       .pipe(
         map((res) => {
-          console.info('🚀 ~ ProductService ~ res:', res);
           return {
             products: res.body || [],
             total: Number(res.headers.get('X-Total-Count')) || 0,
           };
         })
       );
+  }
+
+  getProductById(id: number): Observable<Product> {
+    return this.http.get<Product>(`${this.apiUrl}/${id}`);
   }
 
   createProduct(product: Partial<Product>): Observable<Product> {
@@ -48,5 +51,17 @@ export class ProductService {
       updatedAt: new Date(),
     };
     return this.http.post<Product>(this.apiUrl, productPayload);
+  }
+
+  updateProduct(id: number, product: Partial<Product>): Observable<Product> {
+    const productPayload: Partial<Product> = {
+      ...product,
+      updatedAt: new Date(),
+    };
+    return this.http.put<Product>(`${this.apiUrl}/${id}`, productPayload);
+  }
+
+  deleteProduct(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

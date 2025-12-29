@@ -36,6 +36,8 @@ export class ProductsTable {
   public productsList = input<Product[]>();
   public currentSort = input<string>('none');
   public sortChanged = output<string>();
+  public editProduct = output<number>();
+  public deleteProduct = output<number>();
 
   public productsCount = computed(() => {
     return this.productsList()?.length;
@@ -59,5 +61,13 @@ export class ProductsTable {
 
   onSortChange(value: string): void {
     this.sortChanged.emit(value);
+  }
+
+  onEdit(productId: number): void {
+    this.editProduct.emit(productId);
+  }
+
+  onDelete(productId: number): void {
+    this.deleteProduct.emit(productId);
   }
 }

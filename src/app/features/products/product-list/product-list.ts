@@ -8,7 +8,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ProductFilters } from '../product-filters/product-filters';
+import { DeleteDialog, DeleteDialogData } from '../../../shared/delete-dialog/delete-dialog';
 import { ProductsTable } from '../products-table/products-table';
 import {
   Product,
@@ -28,6 +30,7 @@ import { ProductService } from '../services/product.service';
     MatInputModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
+    MatDialogModule,
     FormsModule,
     ProductFilters,
     ProductsTable,
@@ -39,6 +42,7 @@ export class ProductList implements OnInit {
   public productService = inject(ProductService);
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
+  private dialog = inject(MatDialog);
 
   products = signal<Product[]>([]);
   activeFilters = signal<ProductActiveFilters>({ categories: [], status: null });
@@ -91,7 +95,6 @@ export class ProductList implements OnInit {
           this.totalProducts.set(total);
         },
         error: (error) => {
-          console.error('Error loading products:', error);
           const errorMessage = error?.message || 'Failed to load products. Please try again.';
           this.snackBar.open(errorMessage, 'Close', {
             duration: 5000,
@@ -137,6 +140,49 @@ export class ProductList implements OnInit {
 
   onCreateProduct(): void {
     this.router.navigate(['/products/create']);
+  }
+
+  onEditProduct(productId: number): void {
+    this.router.navigate(['/products/edit', productId]);
+  }
+
+  onDeleteProduct(productId: number): void {
+    const product = this.products().find((p) => p.id === productId);
+    const productName = product?.name || 'this product';
+
+    const dialogData: DeleteDialogData = {
+      productName: productName,
+    };
+
+    const dialogRef = this.dialog.open(DeleteDialog, {
+      width: '400px',
+      data: dialogData,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.productService.deleteProduct(productId).subscribe({
+          next: () => {
+            this.snackBar.open('Product deleted successfully!', 'Close', {
+              duration: 3000,
+              horizontalPosition: 'start',
+              verticalPosition: 'bottom',
+              panelClass: ['success-snackbar'],
+            });
+            this.loadProducts();
+          },
+          error: (error) => {
+            const errorMessage = error?.message || 'Failed to delete product. Please try again.';
+            this.snackBar.open(errorMessage, 'Close', {
+              duration: 5000,
+              horizontalPosition: 'start',
+              verticalPosition: 'bottom',
+              panelClass: ['error-snackbar'],
+            });
+          },
+        });
+      }
+    });
   }
 
   onSortChanged(sortValue: string): void {

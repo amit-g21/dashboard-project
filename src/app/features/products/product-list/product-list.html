@@ -36,6 +36,8 @@
         [productsList]="filteredProducts()"
         [currentSort]="getCurrentSortValue()"
         (sortChanged)="onSortChanged($event)"
+        (editProduct)="onEditProduct($event)"
+        (deleteProduct)="onDeleteProduct($event)"
       >
       </app-products-table>
 

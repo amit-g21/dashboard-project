@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -9,12 +10,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 import { ProductService } from '../services/product.service';
 import { categoryList } from '../constants/products.constants';
 
 @Component({
-  selector: 'app-create-product',
+  selector: 'app-edit-product',
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -27,20 +27,28 @@ import { categoryList } from '../constants/products.constants';
     MatProgressSpinnerModule,
     MatSnackBarModule,
   ],
-  templateUrl: './create-product.html',
-  styleUrl: './create-product.scss',
+  templateUrl: './edit-product.html',
+  styleUrl: './edit-product.scss',
 })
-export class CreateProduct implements OnInit {
+export class EditProduct implements OnInit {
   private fb = inject(FormBuilder);
   private productService = inject(ProductService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
   private snackBar = inject(MatSnackBar);
 
   public isSubmitting = signal<boolean>(false);
+  public isLoading = signal<boolean>(true);
   public categoryList = categoryList;
   public productForm!: FormGroup;
+  private productId!: number;
 
   ngOnInit(): void {
+    this.initializeForm();
+    this.loadProduct();
+  }
+
+  private initializeForm(): void {
     this.productForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       sku: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
@@ -52,14 +60,62 @@ export class CreateProduct implements OnInit {
     });
   }
 
+  private loadProduct(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (!id) {
+      this.snackBar.open('Invalid product ID', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'start',
+        verticalPosition: 'bottom',
+        panelClass: ['error-snackbar'],
+      });
+      this.router.navigate(['/products']);
+      return;
+    }
+
+    this.productId = Number(id);
+    this.isLoading.set(true);
+
+    this.productService.getProductById(this.productId).subscribe({
+      next: (product) => {
+        this.populateForm(product);
+        this.isLoading.set(false);
+      },
+      error: (error) => {
+        console.error('Error loading product:', error);
+        this.isLoading.set(false);
+        const errorMessage = error?.message || 'Failed to load product. Please try again.';
+        this.snackBar.open(errorMessage, 'Close', {
+          duration: 5000,
+          horizontalPosition: 'start',
+          verticalPosition: 'bottom',
+          panelClass: ['error-snackbar'],
+        });
+        this.router.navigate(['/products']);
+      },
+    });
+  }
+
+  private populateForm(product: any): void {
+    this.productForm.patchValue({
+      name: product.name || '',
+      sku: product.sku || '',
+      category: product.category || '',
+      description: product.description || '',
+      price: product.price || 0,
+      stock: product.stock || 0,
+      isActive: product.isActive !== undefined ? product.isActive : true,
+    });
+  }
+
   onSubmit(): void {
     if (this.productForm.valid && !this.isSubmitting()) {
       this.isSubmitting.set(true);
       const formValue = this.productForm.value;
 
-      this.productService.createProduct(formValue).subscribe({
+      this.productService.updateProduct(this.productId, formValue).subscribe({
         next: () => {
-          this.snackBar.open('Product created successfully!', 'Close', {
+          this.snackBar.open('Product updated successfully!', 'Close', {
             duration: 3000,
             horizontalPosition: 'start',
             verticalPosition: 'bottom',
@@ -69,7 +125,7 @@ export class CreateProduct implements OnInit {
         },
         error: (error) => {
           this.isSubmitting.set(false);
-          const errorMessage = error?.message || 'Failed to create product. Please try again.';
+          const errorMessage = error?.message || 'Failed to update product. Please try again.';
           this.snackBar.open(errorMessage, 'Close', {
             duration: 5000,
             horizontalPosition: 'start',
