@@ -27,6 +27,11 @@ export enum SortDirection {
   Desc = 'desc',
 }
 
+export enum SubmitMode {
+  Create = 'create',
+  Edit = 'edit',
+}
+
 export interface SortConfig {
   field: SortField | null;
   direction: SortDirection;

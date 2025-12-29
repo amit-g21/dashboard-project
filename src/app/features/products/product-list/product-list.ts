@@ -1,5 +1,6 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
-import { finalize } from 'rxjs';
+import { Component, computed, inject, OnInit, signal, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { finalize, debounceTime, Subject } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -43,6 +44,8 @@ export class ProductList implements OnInit {
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
   private dialog = inject(MatDialog);
+  private destroyRef = inject(DestroyRef);
+  private searchSubject = new Subject<string>();
 
   products = signal<Product[]>([]);
   activeFilters = signal<ProductActiveFilters>({ categories: [], status: null });
@@ -60,34 +63,35 @@ export class ProductList implements OnInit {
   });
 
   filteredProducts = computed(() => {
-    let products = this.products();
-
-    const term = this.term().toLowerCase();
-    if (term) {
-      products = products.filter((product) => product.name.toLowerCase().includes(term));
-    }
-
-    const filters = this.activeFilters();
-    if (filters.categories.length > 0) {
-      products = products.filter((product) => filters.categories.includes(product.category));
-    }
-
-    if (filters.status !== null) {
-      products = products.filter((product) => product.isActive === filters.status);
-    }
-
-    return products;
+    return this.products();
   });
 
   ngOnInit() {
     this.loadProducts();
+
+    this.searchSubject
+      .pipe(debounceTime(500), takeUntilDestroyed(this.destroyRef))
+      .subscribe((searchTerm: string) => {
+        this.term.set(searchTerm);
+        this.currentPage.set(1);
+        this.loadProducts();
+      });
   }
 
   loadProducts(): void {
     this.loading.set(true);
     const sort = this.sortBy();
+    const filters = this.activeFilters();
+    const searchTerm = this.term();
     this.productService
-      .getProducts(this.currentPage(), this.pageSize(), sort.field, sort.direction)
+      .getProducts(
+        this.currentPage(),
+        this.pageSize(),
+        sort.field,
+        sort.direction,
+        filters,
+        searchTerm
+      )
       .pipe(finalize(() => this.loading.set(false)))
       .subscribe({
         next: ({ products, total }) => {
@@ -108,12 +112,13 @@ export class ProductList implements OnInit {
 
   onSearch(event: Event) {
     const value = (event.target as HTMLInputElement).value;
-    this.term.set(value);
+    this.searchSubject.next(value);
   }
 
   onFiltersChanged(filters: ProductActiveFilters): void {
     this.activeFilters.set(filters);
     this.currentPage.set(1);
+    this.loadProducts();
   }
 
   nextPage(): void {

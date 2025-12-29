@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { Product, SortField, SortDirection } from '../models/product.model';
+import { Product, SortField, SortDirection, ProductActiveFilters } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +14,9 @@ export class ProductService {
     page: number,
     limit: number,
     sortField?: SortField | null,
-    sortDirection?: SortDirection
+    sortDirection?: SortDirection,
+    filters?: ProductActiveFilters,
+    searchTerm?: string
   ): Observable<{
     products: Product[];
     total: number;
@@ -23,6 +25,20 @@ export class ProductService {
 
     if (sortField) {
       params = params.set('_sort', sortField).set('_order', sortDirection || SortDirection.Asc);
+    }
+
+    if (searchTerm && searchTerm.trim()) {
+      params = params.set('name_like', searchTerm.trim());
+    }
+
+    if (filters?.categories && filters.categories.length > 0) {
+      filters.categories.forEach((category) => {
+        params = params.append('category', category);
+      });
+    }
+
+    if (filters?.status !== null && filters?.status !== undefined) {
+      params = params.set('isActive', filters.status.toString());
     }
 
     return this.http
