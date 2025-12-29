@@ -1,86 +1,118 @@
-Product Management Dashboard
+# Product Management Dashboard
 
-Angular application for managing products in an e-commerce catalog.
-The project demonstrates clean architecture, RxJS usage, reactive forms, caching, and basic product CRUD flows.
+Angular application for managing products in an e-commerce catalog. The project demonstrates clean architecture, RxJS usage, reactive forms, caching, and basic product CRUD flows.
 
----
+## 📌 Features
 
-📌 Features
+- **Product list with:**
+  - Search functionality
+  - Filters (category, status)
+  - Sorting options
+  - Pagination
+- **Create new product**
+- **Edit existing product**
+- Reactive Forms with validation
+- Clear UI states: loading, empty state, error handling
+- Client-side caching using RxJS
+- Strong typing with TypeScript
+- Feature-based folder structure
 
-Product list with:
+## 🧱 Tech Stack
 
-Search
+- Angular
+- Angular Material
+- RxJS
+- json-server (mock backend)
+- TypeScript
 
-Filters (category, status)
+## 📁 Project Structure
 
-Sorting
+```
+src/app/
+├── features/products/
+│   ├── components/     # Reusable UI components
+│   ├── pages/          # Routed pages (list, create, edit)
+│   ├── services/       # API and data access
+│   ├── models/         # Strongly typed interfaces and enums
+│   └── constants/      # Constants and configuration
+└── shared/             # Shared components across features
+```
 
-Pagination
+## 🚀 Getting Started
 
-Create new product
+### Prerequisites
 
-Edit existing product
+- Node.js (v18 or higher)
+- npm (v9 or higher)
 
-Reactive Forms with validation
+### Installation
 
-Clear UI states: loading, empty state, error handling
+1. **Clone the repository**
 
-Client-side caching using RxJS
+   ```bash
+   git clone <repository-url>
+   cd dashboard-project
+   ```
 
-Strong typing with TypeScript
+2. **Install dependencies**
 
-Feature-based folder structure
-
----
-
-🧱 Tech Stack
-
-Angular
-
-Angular Material
-
-RxJS
-
-json-server (mock backend)
-
-TypeScript
-
----
-
-📁 Project Structure
-
-pages – routed pages (list, create, edit)
-
-components – reusable UI components
-
-services – API and data access
-
-models – strongly typed interfaces and enums
-
----
-
-🚀 Getting Started
-
-1. Clone the repository
-
-
-
-git clone
-cd dashboard-project.
-
-
-
-2. Install dependencies
+   ```bash
    npm install
+   ```
 
-   
+3. **Start the mock backend (json-server)**
 
-4. Run mock backend (json-server)
+   The project uses `json-server` as a fake REST API.
 
-The project uses json-server as a fake REST API.
+   ```bash
+   npm run server
+   ```
 
-npm run server
+   The server will run on `http://localhost:3000`
 
-4. Run the Angular application
+4. **Run the Angular application**
 
-npm start
+   In a new terminal:
+
+   ```bash
+   npm start
+   ```
+
+   The app will be available at `http://localhost:4200`
+
+## 🧪 Running Tests
+
+```bash
+# Run all tests
+npm test
+
+# Run tests with coverage
+npm run test:coverage
+
+# Run specific test file
+ng test --include='**/product.service.spec.ts'
+```
+
+## 📝 Available Scripts
+
+- `npm start` - Start the development server
+- `npm run server` - Start json-server (mock API)
+- `npm test` - Run unit tests
+- `npm run build` - Build the project for production
+- `npm run lint` - Lint the code
+
+## 🌐 API Endpoints
+
+The mock API provides the following endpoints:
+
+- `GET /products` - Get all products (supports pagination, sorting, filtering)
+- `GET /products/:id` - Get a single product
+- `POST /products` - Create a new product
+- `PUT /products/:id` - Update a product
+- `DELETE /products/:id` - Delete a product
+
+## 📚 Additional Information
+
+- For form validation rules, see the ProductForm component
+- For API caching implementation, see the ProductService
+- The project uses Angular's standalone components (no NgModules)
