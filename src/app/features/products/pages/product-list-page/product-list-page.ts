@@ -62,10 +62,6 @@ export class ProductList implements OnInit {
     direction: SortDirection.Asc,
   });
 
-  filteredProducts = computed(() => {
-    return this.products();
-  });
-
   ngOnInit() {
     this.loadProducts();
 
@@ -194,6 +190,7 @@ export class ProductList implements OnInit {
   }
 
   onSortChanged(sortValue: string): void {
+    console.info('🚀 ~ ProductList ~ sortValue:', sortValue);
     if (!sortValue || sortValue === 'none') {
       this.sortBy.set({ field: null, direction: SortDirection.Asc });
     } else {

@@ -27,7 +27,7 @@
       </div>
       }
       <app-products-table
-        [productsList]="filteredProducts()"
+        [productsList]="products()"
         [currentSort]="getCurrentSortValue()"
         (sortChanged)="onSortChanged($event)"
         (editProduct)="onEditProduct($event)"
